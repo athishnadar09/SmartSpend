@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ExpenseManager {
     static ArrayList<Expense> expenses = new ArrayList<>();
@@ -21,5 +22,18 @@ public class ExpenseManager {
         }
         System.out.println("Total Expense : ₹"+sum);
     }
+    public void categorySummary(){
+        HashMap<String, Double> categoryTotals = new HashMap<>();
+        for(Expense expense : expenses){
+            String category = expense.getCategory();
+            double amount = expense.getAmount();
+
+            categoryTotals.put(category, categoryTotals.getOrDefault(category, 0.0)+amount);
+        }
+        for(String category : categoryTotals.keySet()){
+            System.out.println(category+" : ₹"+categoryTotals.get(category));
+        }
+    }
+
     
 }

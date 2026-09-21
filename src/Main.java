@@ -6,9 +6,8 @@ import java.util.InputMismatchException;
 public class Main {
     static Scanner sc = new Scanner(System.in);
 
-    static ArrayList<Expense> expenses = new ArrayList<>();
+    static ExpenseManager manager = new ExpenseManager();
 
-    static HashMap<String, Double> categoryTotals = new HashMap<>();
     public static void main(String[]args){
         int choice;
         do{
@@ -28,13 +27,13 @@ public class Main {
                     addExpense();
                     break;
                 case 2:
-                    viewExpense();
+                    manager.viewExpense();
                     break;
                 case 3:
-                    totalExpense();
+                    manager.totalExpense();
                     break;
                 case 4 :
-                    categorySummary();
+                    manager.categorySummary();
                     break;
                 case 5:
                     System.out.println("Thanks for using");
@@ -60,6 +59,7 @@ public class Main {
         }
         catch(InputMismatchException e){
             System.out.println("Please enter the valid number");
+            sc.nextLine();
             return;
         }
         sc.nextLine();
@@ -79,38 +79,9 @@ public class Main {
         String date = sc.nextLine();
 
         Expense expense = new Expense(amount, category, description, date);
-        expenses.add(expense);
+        manager.addExpense(expense);
+        System.out.println("Expense added successfully");
     }
 
-    static void viewExpense(){
-        for(Expense expense : expenses){
-            System.out.println("Amount : "+expense.getAmount());
-            System.out.println("Category : "+expense.getCategory());
-            System.out.println("Description : "+expense.getDescription());
-            System.out.println("Date : "+expense.getDate());
-            System.out.println("------------------------------------");
-        }
-
-    }
-
-    static void totalExpense(){
-        double sum=0;
-        for(Expense expense : expenses){
-            sum += expense.getAmount();
-        }
-        System.out.println("Total Expense : "+sum);
-
-    }
-
-    static void categorySummary(){
-        for (Expense expense : expenses){
-            String category = expense.getCategory();
-            double amount = expense.getAmount();
-            categoryTotals.put(category, categoryTotals.getOrDefault(category, 0.0)+amount);
-        }
-
-        for(String category : categoryTotals.keySet()){
-            System.out.println(category+" : ₹"+categoryTotals.get(category));
-        }
-    }
+   
 }
