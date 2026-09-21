@@ -1,10 +1,15 @@
+import java.time.LocalDate;
+
 public class Expense {
+        private static int nextId = 1;
+        private int id;
         private double amount;
         private String category;
         private String description;
-        private String date;
+        private LocalDate date;
 
-        public Expense (double amount, String category, String description, String date){
+        public Expense (double amount, String category, String description, LocalDate date){
+            this.id = nextId++;
             this.amount = amount;
             this.category = category;
             this.description = description;
@@ -12,6 +17,10 @@ public class Expense {
         }
 
         //Encapsulation
+        public int getId(){
+            return id;
+        }
+
         public double getAmount(){
             return amount;
         }
@@ -24,7 +33,7 @@ public class Expense {
             return description;
         }
 
-        public String getDate(){
+        public LocalDate getDate(){
             return date;
         }
 }

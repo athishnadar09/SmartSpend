@@ -8,6 +8,7 @@ public class ExpenseManager {
     }
     public void viewExpense(){
         for(Expense expense : expenses){
+            System.out.println("ID : "+expense.getId());
             System.out.println("Amount : "+expense.getAmount());
             System.out.println("Category : "+expense.getCategory());
             System.out.println("Description : "+expense.getDescription());
@@ -33,6 +34,17 @@ public class ExpenseManager {
         for(String category : categoryTotals.keySet()){
             System.out.println(category+" : ₹"+categoryTotals.get(category));
         }
+    }
+
+    public void deleteExpense (int id){
+        for (Expense expense : expenses){
+            if(expense.getId()==id){
+                expenses.remove(expense);
+                System.out.println("Expense deleted successfully.");
+                return;
+            }
+        }
+        System.out.println("Expense with ID "+id+"not found");
     }
 
     

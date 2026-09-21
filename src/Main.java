@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.time.LocalDate;
 
 public class Main {
     static Scanner sc = new Scanner(System.in);
@@ -15,8 +16,9 @@ public class Main {
             System.out.println("1.Add Expense");
             System.out.println("2.View Expense");
             System.out.println("3.Total Expense");
-            System.out.println("4. Category Summary");
-            System.out.println("5.Exit");
+            System.out.println("4.Category Summary");
+            System.out.println("5.Delete Expense");
+            System.out.println("6.Exit");
             System.out.println("====================");
             System.out.println("Enter the choice");
             choice = sc.nextInt();
@@ -35,7 +37,12 @@ public class Main {
                 case 4 :
                     manager.categorySummary();
                     break;
-                case 5:
+                case 5 :
+                    System.out.println("Enter the Id of Expense which to be Deleted");
+                    int id = sc.nextInt();
+                    manager.deleteExpense(id);
+                    break;
+                case 6:
                     System.out.println("Thanks for using");
                     break;
             
@@ -43,7 +50,7 @@ public class Main {
                     break;
             }
 		System.out.println();
-        }while(choice!=5);
+        }while(choice!=6);
 
     }
 
@@ -75,8 +82,15 @@ public class Main {
             System.out.println("description cannot be Empty");
             return;
         }
-        System.out.println("Enter the date");
-        String date = sc.nextLine();
+        System.out.println("Enter the date (YYYY-MM-DD)");
+        String dateInput = sc.nextLine();
+        LocalDate date;
+        try {
+            date = LocalDate.parse(dateInput);
+        } catch (Exception e) {
+            System.out.println("Invalid Date. Use (YYYY-MM-DD)");
+            return;
+        }
 
         Expense expense = new Expense(amount, category, description, date);
         manager.addExpense(expense);
