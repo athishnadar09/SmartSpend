@@ -37,9 +37,9 @@ public class ExpenseManager {
     }
 
     public void deleteExpense (int id){
-        for (Expense expense : expenses){
-            if(expense.getId()==id){
-                expenses.remove(expense);
+        for (int i=0; i<expenses.size(); i++){
+            if(expenses.get(i).getId()==i){
+                expenses.remove(i);
                 System.out.println("Expense deleted successfully.");
                 return;
             }

@@ -38,9 +38,7 @@ public class Main {
                     manager.categorySummary();
                     break;
                 case 5 :
-                    System.out.println("Enter the Id of Expense which to be Deleted");
-                    int id = sc.nextInt();
-                    manager.deleteExpense(id);
+                    deleteExpense();
                     break;
                 case 6:
                     System.out.println("Thanks for using");
@@ -95,6 +93,18 @@ public class Main {
         Expense expense = new Expense(amount, category, description, date);
         manager.addExpense(expense);
         System.out.println("Expense added successfully");
+    }
+    static void deleteExpense(){
+        System.out.println("Enter the Id of Expense which to be Deleted");
+                    int id;
+                    try{
+                    id = sc.nextInt();
+                    }catch(InputMismatchException e){
+                        System.out.println("Please Enter the vailid id ");
+                        sc.nextLine();
+                        return;
+                    }
+                    manager.deleteExpense(id);
     }
 
    
