@@ -1,3 +1,7 @@
 *.class
-target/
 src/main/resources/db.properties
+target/
+.idea/
+*.iml
+
+classpath.txt
