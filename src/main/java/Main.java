@@ -29,7 +29,7 @@ public class Main {
                     addExpense();
                     break;
                 case 2:
-                    manager.viewExpense();
+                    manager.viewExpenses();
                     break;
                 case 3:
                     manager.totalExpense();

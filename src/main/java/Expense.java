@@ -1,39 +1,63 @@
+
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
+
+@Entity
+@Table(name = "expenses")
 public class Expense {
-        private static int nextId = 1;
-        private int id;
-        private double amount;
-        private String category;
-        private String description;
-        private LocalDate date;
 
-        public Expense (double amount, String category, String description, LocalDate date){
-            this.id = nextId++;
-            this.amount = amount;
-            this.category = category;
-            this.description = description;
-            this.date = date;
-        }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-        //Encapsulation
-        public int getId(){
-            return id;
-        }
+    @Column(nullable = false)
+    private double amount;
 
-        public double getAmount(){
-            return amount;
-        }
+    @Column(nullable = false, length = 100)
+    private String category;
 
-        public String getCategory(){
-            return category;
-        }
+    @Column(nullable = false, length = 255)
+    private String description;
 
-        public String getDescription(){
-            return description;
-        }
+    @Column(nullable = false)
+    private LocalDate date;
 
-        public LocalDate getDate(){
-            return date;
-        }
+    // Required by Hibernate
+    public Expense() {
+    }
+
+    // Constructor for adding new expenses
+    public Expense(double amount, String category,
+                   String description, LocalDate date) {
+        this.amount = amount;
+        this.category = category;
+        this.description = description;
+        this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
 }
